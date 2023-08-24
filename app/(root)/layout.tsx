@@ -2,7 +2,7 @@
  * @Author: mingongze andersonmingz@gmail.com
  * @Date: 2023-08-09 17:20:15
  * @LastEditors: mingongze andersonmingz@gmail.com
- * @LastEditTime: 2023-08-10 10:20:55
+ * @LastEditTime: 2023-08-23 19:49:42
  * @FilePath: \threads\app\(root)\layout.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,6 +10,10 @@ import { ClerkProvider } from "@clerk/nextjs"
 import '../globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import LeftSidebar from "@/components/shared/LeftSidebar"
+import Topbar from "@/components/shared/Topbar"
+import RightSidebar from "@/components/shared/RightSidebar"
+import Bottombar from "@/components/shared/Bottombar"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +30,22 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Topbar />
+
+          <main>
+            <LeftSidebar />
+
+            <section className="main-container">
+               <div className="w-full max-w-4xl">
+                 { children }
+               </div>
+            </section>
+            <RightSidebar />
+          </main>
+
+          <Bottombar />
+        </body>
       </html>
     </ClerkProvider>
   )
